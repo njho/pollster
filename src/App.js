@@ -52,7 +52,7 @@ class App extends React.Component {
                 <div style={{position: 'absolute', left: '50%'}}>
 
                     <div className="pointer" style={{position: 'relative', left: '-50%' }} onClick={() => this.toggleQuestions()}>
-                        <Motion style={{x: spring(this.state.visible ? 280 : 0)}}>
+                        <Motion style={{x: spring(this.state.visible ? 350 : 0)}}>
                             {({x}) =>
                                 // children is a callback which should accept the current value of
                                 // `style`
@@ -61,23 +61,23 @@ class App extends React.Component {
                                     WebkitTransform: `translate3d(0, ${-x}px, 0)`,
                                     transform: `translate3d(0, ${-x}px, 0)`,
                                 }}>
-                                    <div className="title" style={{color: '#767676'}}>Pollsta</div>
+                                    <div className="title" style={{color: '#767676'}}>Pollsta Instructions</div>
 
                                     <p>You will be contacted by a polling phone number POLLSTA has created for you. </p>
-                                    <p>Once you activate polling, all polling participants can send in their response via
+                                    <p>Once you activate polling, all participants can enter their response via
                                         SMS/text!</p>
-                                    <p>Upon closing polling, all unique entries will be tallied and sent back to
+                                    <p>When you, the administrator, close the poll, all unique entries will be tallied and sent back to
                                         you.</p>
-                                    So simple!
+                                    SO SIMPLE! <br/>
+                                    <br/>
+                                    <p>Love our product? Need customizations? Contact us!</p>
 
                                 </div>
                             }
                         </Motion>
                     </div>
                 </div>
-
-
-            < /div>
+            </div>
         );
     }
 }
