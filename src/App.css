@@ -55,12 +55,13 @@
 }
 
 .describe-me {
-text-align: center
+text-align: center;
 }
 
 .linethrough {
   text-decoration:line-through;
-  color: #e0e8ef;
+  color: #fbffb8;
+
 }
 
 .questions {
@@ -132,7 +133,7 @@ form {
 .card {
   padding: 35px;
   align-self: center;
-  background-color: #fdfff2;
+  background-color: white;
   margin-left: auto;
   margin-right: auto;
   width: 60vw;
@@ -140,4 +141,54 @@ form {
   text-align: center;
   color: #767676;
   height: 100vh;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.paragraph p{
+  -webkit-margin-before: 0.5em;
+  -webkit-margin-after: 0.5em;
+}
+
+.inputWrapper {
+  padding: 10px 14px;
+  -webkit-box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
+  border-radius: 4px;
+  background: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  display: block;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 18px;
+  line-height: 1.2em;
+  height: 1.2em;
+  color: #757575
+}
+*:focus {
+  outline: 0;
 }
