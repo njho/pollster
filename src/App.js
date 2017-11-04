@@ -5,6 +5,11 @@ import {default as IconBase} from 'react-icon-base';
 import StripeWrapper from './Stripe/StripeWrapper';
 import {Motion, spring} from 'react-motion'
 import {CSSTransitionGroup} from 'react-transition-group'
+import Phone from 'react-phone-number-input'
+import rrui from 'react-phone-number-input/rrui.css'
+import rpni from 'react-phone-number-input/style.css'
+
+import Measure from 'react-measure'
 
 
 class App extends React.Component {
@@ -13,8 +18,12 @@ class App extends React.Component {
         super();
         this.state = {
             visible: false,
-            statements: [' collect quick answers!', ' collect survey results!', ' ask him/her on a date! Maybe not...', ' conduct a simple poll!', " see which project people love!", ' vote for a chairperson!', ' validate your ideas!', ' ask your parents if you should take in the dog!', " get anonymous feedback", " find out if you should implement a feature!",],
-            statement: [' collect quick answers!']
+            statements: [' collect quick answers!', ' collect survey results!', ' ask him/her on a date! Or not...', ' conduct a simple poll!', " see which project people love!", ' vote for a chairperson!', ' validate your ideas!', ' ask your parents if you should take in the dog!', " get anonymous feedback", " find out if you should implement a feature!",],
+            statement: [' collect quick answers!'],
+            dimensions: {
+                width: -1,
+                height: -1
+            }
         }
     }
 
@@ -52,18 +61,19 @@ class App extends React.Component {
         return (
             <div className="App">
 
+
                 <div className="jumbotron">
+
+
                     <span className="title main">Pollsta</span>
                     <div className="inputWrapper">
-                        <input
-                            className="input"
-                            type="text" name="phoneNumber" id="phoneNumber"
-                            value={this.state.name}
-                            onChange={this.changeHandler}
-                            autoComplete="off"
-                            maxLength="50"
-                        />
+                        <Phone
+                            style={{color: '#757575'}}
+                            placeholder="Phone Number"
+                            value={this.state.value}
+                            onChange={value => this.setState({value})}/>
                     </div>
+
                     <StripeWrapper/>
                     <div className="describe-me">
                         <h1 style={{color: '#fbffb8'}}> The easiest way to
@@ -96,7 +106,7 @@ class App extends React.Component {
 
                     <div className="pointer" style={{position: 'relative', left: '-50%'}}
                          onClick={() => this.toggleQuestions()}>
-                        <Motion style={{x: spring(this.state.visible ? 350 : 0)}}>
+                        <Motion style={{x: spring(this.state.visible ? this.state.dimensions.height +70 : 0)}}>
                             {({x}) =>
                                 // children is a callback which should accept the current value of
                                 // `style`
@@ -105,24 +115,36 @@ class App extends React.Component {
                                     WebkitTransform: `translate3d(0, ${-x}px, 0)`,
                                     transform: `translate3d(0, ${-x}px, 0)`,
                                 }}>
-                                    <div className="title" style={{color: '#767676'}}>Pollsta Instructions</div>
-                                    <div className="paragraph">
+                                    <Measure
+                                        bounds
+                                        onResize={(contentRect) => {
+                                            this.setState({dimensions: contentRect.bounds})
+                                        }}>
+                                        {({ measureRef }) =>
+                                        <div ref={measureRef}>
+                                            <div className="title" style={{color: '#767676'}}>Pollsta Instructions</div>
+                                            <div className="paragraph">
 
-                                        <p>You will be contacted by the polling phone number POLLSTA has created for
-                                            you. </p>
-                                        <p>After you activate polling, all participants can enter their responses (to
-                                            that same phone number) via
-                                            SMS/text!</p>
-                                        <p>When you, the administrator, close the poll, all unique entries will be
-                                            tallied
-                                            and sent back to
-                                            you.</p>
-                                        <br/>
-                                        SO SIMPLE! <br/>
-                                        <br/>
-                                        <p>Love our product? Need customizations? Contact us!</p>
-                                    </div>
-
+                                                <p>You will be contacted by the polling phone number POLLSTA has created
+                                                    for
+                                                    you. </p>
+                                                <p>After you activate polling, all participants can enter their
+                                                    responses
+                                                    (to
+                                                    that same phone number) via
+                                                    SMS/text!</p>
+                                                <p>When you, the administrator, close the poll, all unique entries will
+                                                    be
+                                                    tallied
+                                                    and sent back to
+                                                    you.</p>
+                                                <br/>
+                                                SO SIMPLE! <br/>
+                                                <br/>
+                                                <p>Love our product? Need customizations? Contact us!</p>
+                                            </div>
+                                        </div>}
+                                    </Measure>
                                 </div>
                             }
                         </Motion>
